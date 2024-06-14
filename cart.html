@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style11.css">
+    <link rel="icon" type="Image/png" href="./images/logo/New folder/1718368720830.png">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">Back</a>
+        <div class="cart-container">
+            <i class="cart-icon"><img src="./images/icon/cart-shopping-solid.svg" alt=""></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+    <main>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be generated here -->
+        </div>
+        <div>Total Price: <span id="total-price">$0.00</span></div>
+        <button id="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </main>
+    
+    <script >
+// cartScript.js
+let cart = [];
+
+function displayCartItems() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = cart.map((p, index) => `
+        <div>
+            <span>${p.name}: $${p.price.toFixed(2)}</span>
+            <button onclick="removeItem(${index})">Remove</button>
+        </div>
+    `).join('');
+}
+
+function calculateTotalPrice() {
+    const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0);
+    document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
+}
+
+function removeItem(index) {
+    cart.splice(index, 1); // Remove the item from the cart array
+    updateCart(); // Update the cart display
+}
+
+function placeOrder() {
+    if (cart.length > 0) {
+        alert('Order placed successfully!');
+        cart = [];
+        localStorage.removeItem('cart'); // Clear cart data from local storage
+        displayCartItems(); // Clear cart items display
+        calculateTotalPrice(); // Clear total price display
+        document.getElementById('cart-count').textContent = '0'; // Reset cart count
+    } else {
+        alert('Your cart is empty.');
+    }
+}
+
+window.onload = function() {
+    const storedCart = JSON.parse(localStorage.getItem('cart'));
+    if (storedCart) {
+        cart = storedCart;
+        displayCartItems();
+        calculateTotalPrice();
+        document.getElementById('cart-count').textContent = cart.length; // Set cart count from local storage
+    }
+};
+
+// Function to update cart display after removing an item
+function updateCart() {
+    displayCartItems();
+    calculateTotalPrice();
+    localStorage.setItem('cart', JSON.stringify(cart)); // Update cart data in local storage
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="Image/png" href="./images/logo/New folder/1718368720823.png">
+<style>
+      .body1 {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .signup-wrap {
+        width: 100%;
+        max-width: 400px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    .signup-wrap h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .group {
+        margin-bottom: 15px;
+    }
+    .group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    .group input[type="text"], .group input[type="password"], .group input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .group .button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .group .button:hover {
+        background: #218838;
+    }
+    .foot-lnk {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .foot-lnk a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .foot-lnk a:hover {
+        text-decoration: underline;
+    }   
+    .login-wrap {
+        width: 100%;
+        max-width: 400px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    .login-wrap h2 {
+        margin-bottom: 20px;
+        color: #333;}
+
+
+        @media all and (max-width: 999px) {
+       
+            .body1 {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: row ;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+        }
+        .login-wrap,.signup-wrap{
+            flex-basis: 60%;
+            box-shadow: 2px 7px 7px 0px #00000042;
+        }
+        }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+ <h1 style="text-align: center;">My Account</h1>
+
+ <div class="body1">
+<div class="login-wrap">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div class="group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="group">
+            <input type="checkbox" id="keepSignedIn">
+            <label for="keepSignedIn">Keep me signed in</label>
+        </div>
+        <div class="group">
+            <button type="button" id="signinBtn" class="button">Sign In</button>
+        </div>
+    </form>
+    <div class="foot-lnk">
+        <a href="#forgot">Forgot Password?</a>
+    </div>
+</div>
+
+
+<div class="signup-wrap">
+    <h2>Create Account</h2>
+    <form id="signupForm">
+        <div class="group">
+            <label for="new-username">Username:</label>
+            <input type="text" id="new-username" name="username" required>
+        </div>
+        <div class="group">
+            <label for="new-password">Password:</label>
+            <input type="password" id="new-password" name="password" required>
+        </div>
+        <div class="group">
+            <label for="repeat-password">Repeat Password:</label>
+            <input type="password" id="repeat-password" name="repeat-password" required>
+        </div>
+        <div class="group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="group">
+            <button type="button" id="signupBtn" class="button">Sign Up</button>
+        </div>
+    </form>
+    <div class="foot-lnk">
+        <a href="#signin">Already have an account? Sign In</a>
+    </div>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+  $("#signinBtn").click(function() {
+    var username = $("#username").val();
+    var password = $("#password").val();
+    
+    if(username !== "" && password !== "") {
+      // Submit the form or do further processing
+      alert("Submitting: Username - " + username + ", Password - " + password);
+      
+      // Clear the input fields
+      $("#username").val("");
+      $("#password").val("");
+    } else {
+      alert("Please enter both username and password!");
+    }
+  });
+});
+
+
+
+$(document).ready(function() {
+  $("#signupBtn").click(function() {
+    var username = $("#new-username").val();
+    var password = $("#new-password").val();
+    var repeatPassword = $("#repeat-password").val();
+    var email = $("#email").val();
+
+    if(username !== "" && password !== "" && repeatPassword !== "" && email !== "") {
+      if (password !== repeatPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      // Submit the form or do further processing
+      alert("Submitting: Username - " + username + ", Password - " + password + ", Email - " + email);
+
+      // Clear the input fields
+      $("#new-username").val("");
+      $("#new-password").val("");
+      $("#repeat-password").val("");
+      $("#email").val("");
+    } else {
+      alert("Please fill in all fields!");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
